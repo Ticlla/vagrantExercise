@@ -1,8 +1,7 @@
 $script = <<-'SCRIPT'
-# curl https://packages.chef.io/files/stable/chef-workstation/21.1.247/el/7/chef-workstation-21.1.247-1.el7.x86_64.rpm --output chef-workstation-21.1.247-1.el7.x86_64.rpm 
-# rpm -ivh chef-workstation-21.1.247-1.el7.x86_64.rpm
-# sudo yum -y install vim
-
+curl https://packages.chef.io/files/stable/chef-workstation/21.1.247/el/7/chef-workstation-21.1.247-1.el7.x86_64.rpm --output chef-workstation-21.1.247-1.el7.x86_64.rpm 
+rpm -ivh chef-workstation-21.1.247-1.el7.x86_64.rpm
+sudo yum -y install vim
 SCRIPT
 
 # -*- mode: ruby -*-
@@ -83,11 +82,11 @@ Vagrant.configure("2") do |config|
         puts i
         v.memory = 2048
         v.cpus = 2
-        if flag  then
+        if flag  then # runniing provision  just one time on provision
           config.vm.provision "shell", inline: $script
           config.vm.provision "shell", path: "provision.sh"
           flag = false
         end
-        i = i + 1
+        i = i + 1 # Monitor how many times bash  is executed
     end
 end
