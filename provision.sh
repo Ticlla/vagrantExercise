@@ -22,5 +22,6 @@ echo '******************* Provisioning ntp configuration ***********************
 	
 echo '******************* Provisioning Start ntp  **************************'
 
-
-	sudo systemctl start ntpd
+	sudo yum install -y ntp     #installing ntp
+	sudo systemctl start ntpd   #starting ntp
+	systemctl status ntpd		#Checking ntp status
